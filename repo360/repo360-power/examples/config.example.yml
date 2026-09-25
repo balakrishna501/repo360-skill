@@ -1,0 +1,257 @@
+# Repo360 Configuration Example
+# Copy this to .repo360/config.yml in your repository
+
+version: "1.0"
+
+# ============================================================================
+# ANALYSIS SCOPE
+# ============================================================================
+analysis:
+  # Languages to analyze
+  languages:
+    - java
+    - python
+    - typescript
+    - javascript
+  
+  # Paths to include (glob patterns)
+  include_patterns:
+    - "src/**/*"
+    - "lib/**/*"
+    - "app/**/*"
+  
+  # Paths to exclude
+  exclude_patterns:
+    - "**/node_modules/**"
+    - "**/target/**"
+    - "**/build/**"
+    - "**/dist/**"
+    - "**/__pycache__/**"
+    - "**/.git/**"
+    - "**/vendor/**"
+    - "**/*.min.js"
+    - "**/*.test.js"
+
+# ============================================================================
+# QUALITY THRESHOLDS
+# ============================================================================
+quality:
+  # Minimum acceptable scores
+  min_overall_score: 70
+  min_maintainability: 65
+  
+  # Complexity limits
+  max_complexity: 10          # Cyclomatic complexity
+  max_cognitive_complexity: 15
+  max_nesting_depth: 4
+  
+  # Size limits
+  max_function_length: 50
+  max_class_length: 500
+  max_file_length: 1000
+  max_parameters: 5
+  
+  # Code duplication
+  max_duplication_percentage: 5
+  min_duplicate_lines: 6      # Minimum lines to consider duplication
+
+# ============================================================================
+# SECURITY CONFIGURATION
+# ============================================================================
+security:
+  enabled: true
+  fail_on_critical: true
+  fail_on_high: false
+  
+  # Dependency scanning
+  check_dependencies: true
+  check_transitive_dependencies: true
+  
+  # Secret detection
+  check_secrets: true
+  custom_secret_patterns:
+    - name: "Internal API Key"
+      pattern: "INTERNAL_API_[A-Za-z0-9]{32}"
+      severity: critical
+  
+  # Allowed open source licenses
+  allowed_licenses:
+    - MIT
+    - Apache-2.0
+    - BSD-2-Clause
+    - BSD-3-Clause
+    - ISC
+    - PostgreSQL
+    - X11
+  
+  # Forbidden packages
+  forbidden_dependencies:
+    - name: "request"
+      reason: "Deprecated, use axios or node-fetch"
+
+# ============================================================================
+# ARCHITECTURE RULES
+# ============================================================================
+architecture:
+  # Architecture style
+  style: "layered"  # Options: layered, microservices, clean, hexagonal
+  
+  # Required layers (for layered architecture)
+  required_layers:
+    - name: "presentation"
+      patterns: ["**/controller/**", "**/api/**", "**/web/**"]
+    - name: "business"
+      patterns: ["**/service/**", "**/business/**", "**/domain/**"]
+    - name: "data"
+      patterns: ["**/repository/**", "**/dao/**", "**/persistence/**"]
+  
+  # Forbidden dependency directions
+  forbidden_dependencies:
+    - from_layer: "data"
+      to_layer: "presentation"
+      severity: critical
+    - from_layer: "data"
+      to_layer: "business"
+      severity: high
+  
+  # Metrics thresholds
+  max_dependencies_per_class: 7
+  max_circular_dependencies: 0
+  min_abstractness: 0.2
+  max_coupling: 20
+
+# ============================================================================
+# TESTING REQUIREMENTS
+# ============================================================================
+testing:
+  # Coverage thresholds
+  min_line_coverage: 80
+  min_branch_coverage: 70
+  min_function_coverage: 85
+  
+  # Require tests for specific paths
+  require_tests_for:
+    - pattern: "**/service/**"
+      reason: "All business logic must be tested"
+    - pattern: "**/controller/**"
+      reason: "All API endpoints must be tested"
+  
+  # Critical paths requiring higher coverage
+  critical_paths:
+    - pattern: "**/*Payment*"
+      min_coverage: 95
+    - pattern: "**/*Auth*"
+      min_coverage: 90
+    - pattern: "**/*Security*"
+      min_coverage: 90
+    - pattern: "**/*Billing*"
+      min_coverage: 95
+
+# ============================================================================
+# NAMING CONVENTIONS
+# ============================================================================
+naming:
+  java:
+    classes: "^[A-Z][a-zA-Z0-9]*$"
+    interfaces: "^I[A-Z][a-zA-Z0-9]*$"
+    methods: "^[a-z][a-zA-Z0-9]*$"
+    constants: "^[A-Z][A-Z0-9_]*$"
+    packages: "^[a-z][a-z0-9]*(\\.[a-z][a-z0-9]*)*$"
+  
+  python:
+    classes: "^[A-Z][a-zA-Z0-9]*$"
+    functions: "^[a-z][a-z0-9_]*$"
+    constants: "^[A-Z][A-Z0-9_]*$"
+    modules: "^[a-z][a-z0-9_]*$"
+  
+  typescript:
+    interfaces: "^I[A-Z][a-zA-Z0-9]*$"
+    types: "^[A-Z][a-zA-Z0-9]*$"
+    classes: "^[A-Z][a-zA-Z0-9]*$"
+    functions: "^[a-z][a-zA-Z0-9]*$"
+    constants: "^[A-Z][A-Z0-9_]*$"
+
+# ============================================================================
+# DOCUMENTATION REQUIREMENTS
+# ============================================================================
+documentation:
+  require_file_headers: true
+  require_class_docs: true
+  require_function_docs_for_public: true
+  require_complex_function_docs: true  # Functions with complexity > 10
+  min_comment_ratio: 10  # percentage
+
+# ============================================================================
+# TECHNICAL DEBT
+# ============================================================================
+technical_debt:
+  hourly_rate: 100  # USD per hour for cost calculation
+  debt_ratio_threshold: 5  # Maximum acceptable debt percentage
+  
+  # Custom effort estimates (hours)
+  effort_estimates:
+    high_complexity: 2
+    medium_complexity: 1
+    code_smell: 0.5
+    duplication: 0.25
+    security_critical: 8
+    security_high: 4
+    security_medium: 2
+
+# ============================================================================
+# REPORTING
+# ============================================================================
+reporting:
+  # Output formats
+  output_formats:
+    - json
+    - markdown
+    - html
+  
+  # Report details
+  include_file_details: true
+  include_history: true
+  include_trends: true
+  
+  # Comparison baseline
+  baseline:
+    branch: "main"
+    compare_on_pr: true
+
+# ============================================================================
+# PERFORMANCE
+# ============================================================================
+performance:
+  parallel_analysis: true
+  max_threads: 4
+  cache_enabled: true
+  incremental_analysis: false  # Only analyze changed files
+
+# ============================================================================
+# INTEGRATIONS
+# ============================================================================
+integrations:
+  # Slack notifications
+  slack:
+    enabled: false
+    webhook_url: "${SLACK_WEBHOOK_URL}"
+    notify_on:
+      - critical_issues
+      - score_drop
+      - security_vulnerabilities
+  
+  # Email notifications
+  email:
+    enabled: false
+    smtp_server: "${SMTP_SERVER}"
+    from: "repo360@company.com"
+    to: ["team@company.com"]
+  
+  # JIRA integration
+  jira:
+    enabled: false
+    url: "${JIRA_URL}"
+    project: "TECH-DEBT"
+    create_issues_for:
+      - critical
+      - high

@@ -1,0 +1,75 @@
+{
+  "name": "repo360",
+  "displayName": "Repo360 - Engineering Intelligence Layer",
+  "version": "1.0.0",
+  "description": "Enterprise-grade repository analysis that detects code quality issues, security vulnerabilities, and technical debt across Java, Python, React, and other languages",
+  "keywords": [
+    "repo360",
+    "repository",
+    "analysis",
+    "code quality",
+    "security",
+    "scanning",
+    "metrics",
+    "technical debt",
+    "java",
+    "python",
+    "react",
+    "enterprise",
+    "architecture"
+  ],
+  "agents": [
+    {
+      "path": "agents/repo360-analyzer.md"
+    },
+    {
+      "path": "agents/repo360-quality-checker.md"
+    },
+    {
+      "path": "agents/repo360-security-scanner.md"
+    },
+    {
+      "path": "agents/repo360-architect.md"
+    }
+  ],
+  "skills": [
+    {
+      "path": "skills/clone-repository.md"
+    },
+    {
+      "path": "skills/analyze-java-code.md"
+    },
+    {
+      "path": "skills/analyze-python-code.md"
+    },
+    {
+      "path": "skills/analyze-react-code.md"
+    },
+    {
+      "path": "skills/detect-security-issues.md"
+    },
+    {
+      "path": "skills/analyze-architecture.md"
+    },
+    {
+      "path": "skills/measure-test-coverage.md"
+    },
+    {
+      "path": "skills/calculate-technical-debt.md"
+    },
+    {
+      "path": "skills/generate-metrics-report.md"
+    }
+  ],
+  "steering": [
+    {
+      "path": "steering/getting-started.md"
+    },
+    {
+      "path": "steering/enterprise-setup.md"
+    },
+    {
+      "path": "steering/custom-rules.md"
+    }
+  ]
+}

@@ -1,0 +1,32 @@
+# Core dependencies
+gitpython>=3.1.40
+requests>=2.31.0
+
+# Code analysis tools
+radon>=6.0.1              # Complexity metrics
+pylint>=3.0.3             # Python linting
+flake8>=7.0.0             # Python style
+bandit>=1.7.5             # Security scanning
+lizard>=1.17.10           # Multi-language complexity
+safety>=2.3.5             # Dependency vulnerability checking
+
+# Java analysis
+javalang>=0.13.0          # Java AST parsing
+
+# JavaScript analysis  
+esprima>=4.0.1            # JavaScript parsing
+
+# Parsing
+lxml>=4.9.3
+beautifulsoup4>=4.12.2
+PyYAML>=6.0.1
+
+# Reporting
+jinja2>=3.1.2
+matplotlib>=3.8.2
+plotly>=5.18.0
+
+# Utilities
+python-dotenv>=1.0.0
+tqdm>=4.66.1
+colorama>=0.4.6
